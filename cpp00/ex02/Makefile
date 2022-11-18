@@ -1,10 +1,12 @@
-NAME = megaphone
+NAME = account
 CXX = c++
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
+# CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
+CPPFLAGS = -std=c++98
 
 BUILD_DIR = build
 
-SRCS = test.cpp Account.cpp
+SRCS = test.cpp \
+		Account.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
