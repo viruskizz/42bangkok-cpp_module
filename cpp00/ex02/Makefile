@@ -1,7 +1,6 @@
 NAME = account
 CXX = c++
-# CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
-CPPFLAGS = -std=c++98
+CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 BUILD_DIR = build
 

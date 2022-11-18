@@ -1,10 +1,6 @@
 #include "Account.hpp"
 #include <iostream>
 
-Account::Account(void) {
-	std::cout << "void" << std::endl;
-}
-
 Account::Account(int initial_deposit) {
 	this->_accountIndex = Account::_nbAccounts;
 	this->_amount = initial_deposit;

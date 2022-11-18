@@ -1,7 +1,6 @@
 NAME = phonebook
 CXX = c++
-# CPPFLAGS = -Wall -Wextra -Werror -std=c++98 
-CPPFLAGS = -std=c++98 
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 
 
 BUILD_DIR = build
 
