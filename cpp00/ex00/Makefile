@@ -8,14 +8,14 @@ SRCS = main.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
+all: $(NAME)
+
 $(OBJS): $(BUILD_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(CXX) $(CPPFLAGS) $(OBJS) -o $(NAME)
-
-all: $(NAME)
 
 clean:
 	rm -rf $(BUILD_DIR)
@@ -25,4 +25,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean
+# .PHONY: all clean fclean

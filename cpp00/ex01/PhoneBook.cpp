@@ -22,10 +22,10 @@ void PhoneBook::display_add(void) {
 	std::cout << BOLD << "phone: " << RESET, std::cin >> tel;
 	std::cout << BOLD << "secret: " << RESET, std::cin >> secret;
 	if (fname.empty() || lname.empty() || nname.empty() || tel.empty() || secret.empty()) {
-		std::cout << RED << "=Fields cannot be empty=" << RESET << std::endl;
+		std::cout << RED << "Fields cannot be empty" << RESET << std::endl;
 	} else {
 		PhoneBook::_add_contact(fname, lname, nname, tel, secret);
-		std::cout << YELLOW << "=Contact added=" << RESET << std::endl;
+		std::cout << YELLOW << "Contact added" << RESET << std::endl;
 	}
 }
 
@@ -57,7 +57,6 @@ void PhoneBook::_add_contact(std::string f, std::string l, std::string n, std::s
 	contact.nname = n;
 	contact.tel = t;
 	contact.secret = s;
-	std::cout << "n = " << this->_contain << std::endl;
 	if (this->_contain > 0)
 		this->_rearrange();
 	this->_list[0] = contact;

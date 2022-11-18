@@ -11,7 +11,10 @@ int	main(void) {
 
 	while (1) {
 		std::cout << "$ ", std::cin >> input;
-		if (str_compare(&input[0], "ADD") == 0) {
+		if (input.empty()) {
+			std::cout << std::endl;
+			return (0);
+		} else if (str_compare(&input[0], "ADD") == 0) {
 			phbook.display_add();
 		} else if (str_compare(&input[0], "SEARCH") == 0) {
 			phbook.display_search();
