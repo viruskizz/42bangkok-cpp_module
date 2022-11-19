@@ -2,9 +2,7 @@
 # define PHONE_BOOK_H
 # include <iostream>
 # include <sstream>
-# include <vector>
 # include <string>
-# include <algorithm>
 # include "Contact.hpp"
 
 # define RED		"\033[0;31m"
