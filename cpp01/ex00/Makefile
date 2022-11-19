@@ -5,7 +5,9 @@ CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 BUILD_DIR = build
 
 SRCS =	main.cpp \
-		Zombie.cpp
+		Zombie.cpp \
+		newZombie.cpp \
+		randomChump.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
