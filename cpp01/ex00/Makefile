@@ -1,10 +1,11 @@
-NAME = megaphone
+NAME = zombie
 CXX = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 BUILD_DIR = build
 
-SRCS = main.cpp
+SRCS =	main.cpp \
+		Zombie.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
