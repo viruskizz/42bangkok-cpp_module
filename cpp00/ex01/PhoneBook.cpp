@@ -2,28 +2,30 @@
 
 
 PhoneBook::PhoneBook(void) {
+	this->_size = 0;
 }
 
 PhoneBook::~PhoneBook(void) {
-	this->_list.clear();
 }
 
 int PhoneBook::getMaxSize(void) {
-	return SIZE;
+	return MAX_SIZE;
 }
 
 void PhoneBook::display_add(void) {
 	Contact	contact;
 
 	if (contact.formContact()) {
-		if (this->_list.size() == SIZE)
-			this->_list.pop_back();
-		this->_list.insert(this->_list.begin(), contact);
+		if (this->_size > 0)
+			this->_rearrange();
+		this->_list[0] = contact;
+		if (this->_size < MAX_SIZE)
+			this->_size += 1;
 	}
 }
 
 void PhoneBook::display_search(void) {
-	if (!this->_list.empty()) {
+	if (this->_size > 0) {
 		this->_print_head_table();
 		this->_print_body_table();
 		this->_search_contact();
@@ -45,45 +47,53 @@ void PhoneBook::_print_head_table(void) {
 }
 
 void PhoneBook::_print_body_table() {
-	const int width = 10;
-	int i = 0;
-	std::vector<Contact>::iterator cnt;
-	for (cnt = this->_list.begin(); cnt < this->_list.end(); cnt++, i++) {
+	const int	width = 10;
+	Contact		cnt;
+	
+	for (int i = 0; i < this->_size; i++) {
+		cnt = this->_list[i];
 		std::cout << "| " << (i + 1) << " | ";
 		std::cout.width(width);
-		std::cout << std::right << this->_limit_word(cnt->fname, width);
+		std::cout << std::right << this->_limit_word(cnt.fname, width);
 		std::cout << " | ";
 		std::cout.width(width);
-		std::cout << std::right << this->_limit_word(cnt->lname, width);
+		std::cout << std::right << this->_limit_word(cnt.lname, width);
 		std::cout << " | ";
 		std::cout.width(width);
-		std::cout << std::right << this->_limit_word(cnt->nname, width);
+		std::cout << std::right << this->_limit_word(cnt.nname, width);
 		std::cout << " | ";
 		std::cout << std::endl;
 	}
 }
 
-void PhoneBook::_search_contact()
-{
-	size_t			idx;
+void PhoneBook::_search_contact() {
+	int			idx;
 	std::string	input;
 
-	std::cout << "SELECT (1-" << this->_list.size() << ") or 0 to cancel: ";
-	std::getline(std::cin, input);
-	// idx = std::stoi(input);
+	std::cout << "SELECT (1-" << this->_size << ") or 0 to cancel: ";
+	if (!std::getline(std::cin, input)) {
+		return;
+	}
 	std::istringstream(input) >> idx;
 	if (idx == 0) {
-		return ;
-	} else if (idx > this->_list.size()) {
+		return;
+	} else if (idx > this->_size) {
 		std::cout << RED << "Out of range" << RESET << std::endl;
 		this->_search_contact();
 	} else {
-		this->_list.at(idx - 1).showInformation();
+		this->_list[idx - 1].showInformation();
+	}
+}
+
+void PhoneBook::_rearrange() {
+	for (int i = MAX_SIZE - 1; i > 0; i--) {
+		if (!this->_list[i - 1].fname.empty())
+			this->_list[i] = this->_list[i - 1];
 	}
 }
 
 std::string PhoneBook::_limit_word(std::string word, size_t size) {
-	std::string tmp;
+	std::string	tmp;
 
 	if (word.length() <= size) {
 		tmp = word;

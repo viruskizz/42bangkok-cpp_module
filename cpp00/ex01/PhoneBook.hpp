@@ -18,7 +18,7 @@
 # define BOLD		"\033[1m"
 # define RESET		"\033[0m"
 
-# define SIZE		8
+# define MAX_SIZE		8
 
 class PhoneBook {
 
@@ -33,11 +33,13 @@ public:
 
 private:
 
-	std::vector<Contact>	_list;
+	int			_size;
+	Contact		_list[MAX_SIZE];
 
 	void		_print_head_table(void);
-	void		_print_body_table();
-	void		_search_contact();
+	void		_print_body_table(void);
+	void		_search_contact(void);
+	void		_rearrange(void);
 	std::string	_limit_word(std::string word, size_t size);
 
 };
