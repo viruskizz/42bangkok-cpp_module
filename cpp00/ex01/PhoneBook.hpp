@@ -18,7 +18,7 @@
 # define BOLD		"\033[1m"
 # define RESET		"\033[0m"
 
-# define SIZE		3
+# define SIZE		8
 
 class PhoneBook {
 

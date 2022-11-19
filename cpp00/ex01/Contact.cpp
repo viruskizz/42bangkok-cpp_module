@@ -7,11 +7,11 @@ Contact::Contact(void) {
 
 void	Contact::showInformation() {
 	std::cout << BOLD << CYAN << "== information ==" << RESET << std::endl;
-	std::cout << BOLD << "firstname: " << GRAY << this->fname << std::endl;
-	std::cout << BOLD << "lastname: " << GRAY << this->lname << std::endl;
-	std::cout << BOLD << "nickname: "  << GRAY << this->nname << std::endl;
-	std::cout << BOLD << "telephhone: " << GRAY << this->tel << std::endl;
-	std::cout << BOLD << "dark_secret: " << GRAY << this->secret << std::endl;
+	std::cout << BOLD << "firstname: " << GRAY << this->fname << RESET << std::endl;
+	std::cout << BOLD << "lastname: " << GRAY << this->lname << RESET << std::endl;
+	std::cout << BOLD << "nickname: "  << GRAY << this->nname << RESET << std::endl;
+	std::cout << BOLD << "telephhone: " << GRAY << this->tel << RESET << std::endl;
+	std::cout << BOLD << "dark_secret: " << GRAY << this->secret << RESET << std::endl;
 }
 
 bool	Contact::formContact() {
