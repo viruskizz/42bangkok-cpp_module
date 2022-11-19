@@ -1,7 +1,10 @@
 #ifndef PHONE_BOOK_H
 # define PHONE_BOOK_H
 # include <iostream>
+# include <sstream>
+# include <vector>
 # include <string>
+# include <algorithm>
 # include "Contact.hpp"
 
 # define RED		"\033[0;31m"
@@ -26,18 +29,15 @@ public:
 
 	void		display_add(void);
 	void		display_search(void);
-	int			getSize(void);
-	int			getContain(void);
+	int			getMaxSize(void);
 
 private:
 
-	int		_contain;
-	Contact	_list[SIZE];
+	std::vector<Contact>	_list;
 
-	void		_rearrange(void);
 	void		_print_head_table(void);
-	void		_print_body_table(std::string search);
-	void		_print_row_contact(int idx, Contact contact);
+	void		_print_body_table();
+	void		_search_contact();
 	std::string	_limit_word(std::string word, size_t size);
 
 };
