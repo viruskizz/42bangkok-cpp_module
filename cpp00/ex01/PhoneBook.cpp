@@ -9,23 +9,14 @@ PhoneBook::~PhoneBook(void) {
 }
 
 void PhoneBook::display_add(void) {
-	std::string	fname;
-	std::string	lname;
-	std::string	nname;
-	std::string	tel;
-	std::string	secret;
+	Contact	contact;
 
-	std::cout << GREEN << "=New contact=" << RESET << std::endl;
-	std::cout << BOLD << "firstname: " << RESET, std::cin >> fname;
-	std::cout << BOLD << "lastname: " << RESET, std::cin >> lname;
-	std::cout << BOLD << "nickname: " << RESET, std::cin >> nname;
-	std::cout << BOLD << "phone: " << RESET, std::cin >> tel;
-	std::cout << BOLD << "secret: " << RESET, std::cin >> secret;
-	if (fname.empty() || lname.empty() || nname.empty() || tel.empty() || secret.empty()) {
-		std::cout << RED << "Fields cannot be empty" << RESET << std::endl;
-	} else {
-		PhoneBook::_add_contact(fname, lname, nname, tel, secret);
-		std::cout << YELLOW << "Contact added" << RESET << std::endl;
+	if (contact.formContact()) {
+		if (this->_contain > 0)
+			this->_rearrange();
+		this->_list[0] = contact;
+		if (this->_contain < SIZE)
+			this->_contain++;
 	}
 }
 
@@ -47,21 +38,6 @@ int PhoneBook::getSize(void) {
 
 int PhoneBook::getContain(void) {
 	return this->_contain;
-}
-
-void PhoneBook::_add_contact(std::string f, std::string l, std::string n, std::string t, std::string s) {
-	Contact	contact;
-
-	contact.fname = f;
-	contact.lname = l;
-	contact.nname = n;
-	contact.tel = t;
-	contact.secret = s;
-	if (this->_contain > 0)
-		this->_rearrange();
-	this->_list[0] = contact;
-	if (this->_contain < SIZE)
-		this->_contain++;
 }
 
 void PhoneBook::_rearrange(void) {

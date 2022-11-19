@@ -8,20 +8,22 @@ int	str_compare(const char *s1, const char *s2);
 int	main(void) {
 	std::string	input;
 	PhoneBook	phbook;
-
-	while (1) {
-		std::cout << "$ ", std::cin >> input;
-		if (input.empty()) {
-			std::cout << std::endl;
-			return (0);
-		} else if (str_compare(&input[0], "ADD") == 0) {
+	
+	while (true) {
+		std::cout << "$ ";
+		if (!std::getline (std::cin, input))
+			break;
+		if (str_compare(&input[0], "ADD") == 0) {
 			phbook.display_add();
 		} else if (str_compare(&input[0], "SEARCH") == 0) {
 			phbook.display_search();
 		} else if (str_compare(&input[0], "EXIT") == 0) {
-			return (0);
+			std::cout << "BYE!!" << std::endl;
+			break;
 		}
+		std::cin.clear();
 	}
+	std::cin.clear();
 	return (0);
 }
 

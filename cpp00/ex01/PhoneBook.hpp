@@ -34,7 +34,6 @@ private:
 	int		_contain;
 	Contact	_list[SIZE];
 
-	void		_add_contact(std::string f, std::string l, std::string n, std::string t, std::string s);
 	void		_rearrange(void);
 	void		_print_head_table(void);
 	void		_print_body_table(std::string search);
