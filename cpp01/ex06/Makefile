@@ -1,6 +1,7 @@
 NAME = harlFilter
 CXX = c++
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
+CPPFLAGS = -Wall -Werror -std=c++98
+
 YELLOW ="\033[0;33m"
 RESET = "\033[0m"
 
