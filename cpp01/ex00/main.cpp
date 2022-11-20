@@ -1,6 +1,6 @@
 #include "Zombie.hpp"
 
-int main(void) {
+int main() {
 	Zombie*	zombie = new Zombie("Araiva");
 	zombie->announce();
 	delete zombie;
