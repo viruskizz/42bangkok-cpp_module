@@ -12,10 +12,5 @@ int main(int argc, char *argv[])
 	filename = argv[1];
 	MyFile myFile = MyFile(argv[1]);
 	MyFile::write(myFile.sed(argv[2], argv[3]), filename + ".replace");
-
-	// std::cout << YELLOW << "ifile:" << RESET << std::endl;
-	// std::cout << myFile.getData() << std::endl;
-	// std::cout << YELLOW << "ofile:" << RESET << std::endl;
-	// std::cout << MyFile::str_repleace(myFile.getData(), argv[2], argv[3]) << std::endl;
 	return (0);
 }
