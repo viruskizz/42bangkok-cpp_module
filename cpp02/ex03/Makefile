@@ -7,7 +7,10 @@ RESET = "\033[0m"
 
 BUILD_DIR = build
 
-SRCS =	main.cpp Fixed.cpp
+SRCS =	main.cpp \
+		Fixed.cpp \
+		Point.cpp \
+		bsp.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
