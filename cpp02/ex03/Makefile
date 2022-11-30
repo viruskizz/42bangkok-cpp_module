@@ -1,4 +1,4 @@
-NAME = fixed
+NAME = bsp
 CXX = c++
 CPPFLAGS = -Wall -Werror -std=c++98
 

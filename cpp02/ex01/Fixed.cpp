@@ -8,7 +8,7 @@ Fixed::Fixed( int const n ) : _fixedPoint( n << _fractionalBit ) {
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed( float const n ) : _fixedPoint( std::roundf( n * ( 1 << _fractionalBit )) ) {
+Fixed::Fixed( float const n ) : _fixedPoint( roundf( n * ( 1 << _fractionalBit )) ) {
 	std::cout << "Float constructor called" << std::endl;
 }
 

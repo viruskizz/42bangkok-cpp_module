@@ -1,7 +1,6 @@
 NAME = fixed
 CXX = c++
-# CPPFLAGS = -Wall -Werror -std=c++98
-CPPFLAGS = -Wall -Werror -std=c++11
+CPPFLAGS = -Wall -Werror -std=c++98
 
 YELLOW ="\033[0;33m"
 RESET = "\033[0m"

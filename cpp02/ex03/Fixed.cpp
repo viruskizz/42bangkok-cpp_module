@@ -1,16 +1,20 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed( void ) : _fixedPoint( 0 ) {}
+Fixed::Fixed( void ) : _fixedPoint( 0 ) {
+}
 
-Fixed::Fixed( int const n ) : _fixedPoint( n << _fractionalBit ) {}
+Fixed::Fixed( int const n ) : _fixedPoint( n << _fractionalBit ) {
+}
 
-Fixed::Fixed( float const n ) : _fixedPoint( roundf( n * ( 1 << _fractionalBit )) ) {}
+Fixed::Fixed( float const n ) : _fixedPoint( roundf( n * ( 1 << _fractionalBit )) ) {
+}
 
 Fixed::Fixed( Fixed const & src ) : _fixedPoint( 0 ) {
 	*this = src;
 }
 
-Fixed::~Fixed( void ) {}
+Fixed::~Fixed( void ) {
+}
 
 Fixed &	Fixed::operator=( Fixed const & rhs ) {
 	if (this != &rhs)
