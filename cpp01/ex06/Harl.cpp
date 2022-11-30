@@ -9,10 +9,13 @@ void	Harl::complainFilter( std::string level ) {
 	{
 		case 0:
 			Harl::_debug();
+			[[fallthrough]];
 		case 1:
 			Harl::_info();
+			[[fallthrough]];
 		case 2:
 			Harl::_warning();
+			[[fallthrough]];
 		case 3:
 			Harl::_error();
 			break;

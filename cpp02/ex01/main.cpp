@@ -12,6 +12,10 @@ int main( void ) {
 	std::cout << "c is " << c << std::endl;
 	std::cout << "d is " << d << std::endl;
 
+	// std::cout << (1 << 8) << std::endl;
+	// std::cout << "bit:a is " << a.getRawBits() << std::endl;
+	// std::cout << "bit:b is " << b.getRawBits() << std::endl;
+
 	std::cout << "a is " << a.toInt() << " as integer" << std::endl;
 	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;

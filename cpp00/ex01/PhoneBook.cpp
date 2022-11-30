@@ -75,7 +75,7 @@ void PhoneBook::_search_contact() {
 		return;
 	}
 	std::istringstream(input) >> idx;
-	if (idx == 0) {
+	if (idx <= 0) {
 		return;
 	} else if (idx > this->_size) {
 		std::cout << RED << "Out of range" << RESET << std::endl;

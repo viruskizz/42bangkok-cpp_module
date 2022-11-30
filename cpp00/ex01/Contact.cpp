@@ -29,7 +29,7 @@ bool	Contact::formContact() {
 	std::cout << std::right << "dark secret: ", std::getline (std::cin, secret);
 	if (fname.empty() || lname.empty() || nname.empty() || tel.empty() || secret.empty()) {
 		std::cout << RED << "Fields cannot be empty" << RESET << std::endl;
-		return true;
+		return false;
 	} else {
 		this->fname = fname;
 		this->lname = lname;
