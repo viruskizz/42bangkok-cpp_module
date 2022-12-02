@@ -17,5 +17,5 @@ void	FragTrap::highFivesGuys() {
 	if (!this->isAlive())
 		return;
 	this->_mp -= 1;
-	std::cout << LRED << "FragTrap " << this->_name << " high fives everyone." << RESET << std::endl;
+	std::cout << GREEN << "FragTrap " << this->_name << " high fives everyone." << RESET << std::endl;
 }
