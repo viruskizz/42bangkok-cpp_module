@@ -19,6 +19,7 @@ Base & Base::operator=(Base const & rhs) {
 	std::cout << "Assignment constructor overload" << std::endl;
 	if (this == &rhs)
 		return *this;
+		
 	this->_name = rhs._name;
 	return *this;
 }
@@ -26,3 +27,13 @@ Base & Base::operator=(Base const & rhs) {
 Base::~Base() {
 	std::cout << "~Deconstructor~" << std::endl;
 }
+
+std::string	Base::getName() const {
+	return this->_name;
+}
+
+std::ostream & operator<<( std::ostream & o, Base const & rhs ) {
+	o << rhs.getName();
+	return o;
+}
+

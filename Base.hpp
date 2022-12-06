@@ -19,6 +19,11 @@ public:
 
 	Base & operator=(Base const & rhs);
 
+
+	std::string	getName(void) const;
+
 };
+
+std::ostream & operator<<( std::ostream & o, Base const & rhs);
 
 #endif

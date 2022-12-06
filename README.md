@@ -47,7 +47,6 @@ public:
 
 Base::Base(): _name("") {
     std::cout << "Default constructor overload" << std::endl;
-    std::cout << "" << std::endl;
 };
 
 Base::Base(std::string name): _name(name){

@@ -7,7 +7,8 @@ RESET = "\033[0m"
 
 BUILD_DIR = build
 
-SRCS =	main.cpp
+SRCS =	main.cpp \
+		Bureaucrat.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
