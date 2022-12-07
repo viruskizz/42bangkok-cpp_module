@@ -2,8 +2,22 @@
 #include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "Intern.hpp"
 
 int main() {
+	std::cout << "======= INTERN =======" << std::endl;
+	{
+		Intern someRandomIntern;
+		Form* rrf;
+		Form* rrr;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		rrr = someRandomIntern.makeForm("robotomy  abd request", "Araiva");
+		std::cout << *rrf << std::endl;
+		// std::cout << *rrr << std::endl;
+		delete rrr;
+		delete rrf;
+	}
+	std::cout << "======= FORM =======" << std::endl;
 	try {
 		Bureaucrat	a = Bureaucrat("A", 1);
 		Bureaucrat	b = Bureaucrat("Bad", 100);
@@ -17,6 +31,7 @@ int main() {
 		// c.executeForm(*sForm); // Fail
 		// c.executeForm(*rForm); // Fail
 		// c.executeForm(*pForm); // Fail
+
 		delete pForm;
 		delete rForm;
 		delete sForm;
@@ -24,5 +39,6 @@ int main() {
 		std::cout << "catch main" << std::endl;
 		std::cout << e.what() << std::endl;
 	}
+
 	return 0;
 }

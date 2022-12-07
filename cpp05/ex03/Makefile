@@ -1,6 +1,6 @@
 NAME = bureaucrat
 CXX = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 YELLOW ="\033[0;33m"
 RESET = "\033[0m"
@@ -9,7 +9,11 @@ BUILD_DIR = build
 
 SRCS =	main.cpp \
 		Bureaucrat.cpp \
-		Form.cpp
+		Form.cpp \
+		PresidentialPardonForm.cpp \
+		RobotomyRequestForm.cpp \
+		ShrubberyCreationForm.cpp \
+		Intern.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
