@@ -53,8 +53,8 @@ bool	Convert::isLiteral(std::string s, int type) {
 void	Convert::printCIDF(void) {
 	this->printChar();
 	this->printInt();
-	this->printFloat();
 	this->printDouble();
+	this->printFloat();
 }
 
 void	Convert::printChar(void) {
