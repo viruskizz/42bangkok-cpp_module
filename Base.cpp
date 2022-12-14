@@ -15,7 +15,6 @@ Base::Base(std::string name): _name(name){
 Base::Base(Base const & src) {
 	std::cout << "Copy constructor overload" << std::endl;
 	*this = src;
-	
 }
 
 Base & Base::operator=(Base const & rhs) {
