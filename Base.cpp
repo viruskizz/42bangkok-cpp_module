@@ -1,5 +1,8 @@
 #include "Base.hpp"
 
+/************************************************
+ * Setup default construct and  member function *
+ ************************************************/
 Base::Base(): _name("") {
 	std::cout << "Default constructor overload" << std::endl;
 	std::cout << "" << std::endl;
@@ -37,3 +40,6 @@ std::ostream & operator<<( std::ostream & o, Base const & rhs ) {
 	return o;
 }
 
+/************************************************
+ *           Specific member function           *
+ ************************************************/

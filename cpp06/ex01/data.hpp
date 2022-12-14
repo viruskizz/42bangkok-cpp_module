@@ -1,4 +1,4 @@
-#ifndef DATA_HH
+#ifndef DATA_H
 #define DATA_H
 
 #include <string>
