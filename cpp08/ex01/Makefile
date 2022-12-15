@@ -7,7 +7,7 @@ RESET = "\033[0m"
 
 BUILD_DIR = build
 
-SRCS =	main.cpp
+SRCS =	main.cpp Span.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
