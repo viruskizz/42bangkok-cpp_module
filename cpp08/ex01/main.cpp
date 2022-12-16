@@ -17,7 +17,7 @@ int main() {
 		Span ss = Span(10);
 		ss.addNumber(99);
 		std::vector<int> myvector;
-		for (int i = 1; i < 100; i++)
+		for (int i = 1; i < 1000; i++)
 			myvector.push_back(i);
 		ss.addNumber(myvector.begin(), myvector.end());
 		std::cout << ss << std::endl;

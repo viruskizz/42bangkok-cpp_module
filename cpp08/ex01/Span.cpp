@@ -55,8 +55,13 @@ void	Span::addNumber(std::vector<int>::iterator it_begin, std::vector<int>::iter
 	if (this->_v.size() >= this->_n)
 		throw std::out_of_range("out of range");
 	std::vector<int>::iterator it;
-	it = this->_v.end();
-	this->_v.insert(it, it_begin, it_end - this->_v.size() + 1);
+	it = it_begin;
+	while (it != it_end) {
+		if (this->_v.size() == this->_n)
+			break;
+		this->addNumber(*it);
+		it++;
+	}
 }
 
 unsigned int	Span::shortestSpan() {
