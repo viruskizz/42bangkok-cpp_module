@@ -5,6 +5,7 @@
 int main(int, char**)
 {
 	Array<int> numbers(MAX_VAL);
+	Array<int> nbs(MAX_VAL);
 	int* mirror = new int[MAX_VAL];
 	srand(time(NULL));
 	for (int i = 0; i < MAX_VAL; i++)
@@ -29,7 +30,6 @@ int main(int, char**)
 			return 1;
 		}
 	}
-
 	try
 	{
 		numbers[-2] = 0;
