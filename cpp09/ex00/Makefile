@@ -1,13 +1,13 @@
 NAME = btc
 CXX = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+# CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
 YELLOW ="\033[0;33m"
 RESET = "\033[0m"
 
 BUILD_DIR = build
 
-SRCS =	main.cpp
+SRCS =	main.cpp BitcoinExchange.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 

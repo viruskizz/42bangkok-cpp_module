@@ -3,13 +3,14 @@
 /************************************************
  * Setup default construct and  member function *
  ************************************************/
-BitcoinExchange::BitcoinExchange(): _name("") {
-	std::cout << "Default constructor overload" << std::endl;
-	std::cout << "" << std::endl;
+
+BitcoinExchange::BitcoinExchange()
+{
+	throw BitcoinExchange::ReadFileException();
 };
 
-BitcoinExchange::BitcoinExchange(std::string name): _name(name){
-	std::cout << "Argument constructor overload" << std::endl;
+BitcoinExchange::BitcoinExchange(std::string name): _fileIn(name){
+	this->readfile();
 };
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & src) {
@@ -22,7 +23,7 @@ BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & rhs) {
 	if (this == &rhs)
 		return *this;
 		
-	this->_name = rhs._name;
+	this->_fileIn = rhs._fileIn;
 	return *this;
 }
 
@@ -31,7 +32,7 @@ BitcoinExchange::~BitcoinExchange() {
 }
 
 std::string	BitcoinExchange::getName() const {
-	return this->_name;
+	return this->_fileIn;
 }
 
 std::ostream & operator<<( std::ostream & o, BitcoinExchange const & rhs ) {
@@ -42,3 +43,23 @@ std::ostream & operator<<( std::ostream & o, BitcoinExchange const & rhs ) {
 /************************************************
  *           Specific member function           *
  ************************************************/
+
+void BitcoinExchange::readfile() const
+{
+	std::fstream	file;
+	std::string		line;
+	file.open(this->_fileIn.c_str());
+	if (!file)
+		throw BitcoinExchange::ReadFileException();
+	else
+	{
+		while (true) {
+			if (!std::getline(file, line))
+				break;
+			std::cout << line << std::endl;
+		}
+		std::cin.clear();
+		file.close();
+	}
+
+}
