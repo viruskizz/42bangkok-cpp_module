@@ -3,17 +3,18 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-#include <deque>
+#include <stack>
 
 class RPN {
 
-protected:
+private:
 
 	std::string		_input;
-	std::deque<int>	_deck;
+	std::stack<int>	_stk;
 	int				_result;
 
 	void			_cal(void);
+
 public:
 
 	RPN(void);
@@ -25,7 +26,7 @@ public:
 
 
 	std::string		getInput(void) const;
-	std::deque<int>	getDeck(void) const;
+	std::stack<int>	getStk(void) const;
 	int				getResult(void) const;
 
 	class ErrorException: public std::exception {
@@ -35,4 +36,4 @@ public:
 };
 
 std::ostream & operator<<( std::ostream & o, RPN const & rhs);
-std::ostream & operator<<( std::ostream & o, std::deque<int> const & rhs );
+std::ostream & operator<<( std::ostream & o, std::stack<int> const & rhs );
