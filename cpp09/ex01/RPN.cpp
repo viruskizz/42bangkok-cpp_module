@@ -20,7 +20,7 @@ RPN & RPN::operator=(RPN const & rhs) {
 		return *this;
 	this->_input = rhs._input;
 	this->_result = rhs._result;
-	this->_deck = rhs._deck;
+	this->_stk = rhs._stk;
 	return *this;
 }
 
@@ -33,20 +33,22 @@ std::string	RPN::getInput() const {
 int	RPN::getResult() const {
 	return this->_result;
 }
-std::deque<int>	RPN::getDeck() const {
-	return this->_deck;
+std::stack<int>	RPN::getStk() const {
+	return this->_stk;
 }
 std::ostream & operator<<( std::ostream & o, RPN const & rhs ) {
 	o << rhs.getInput();
 	return o;
 }
-std::ostream & operator<<( std::ostream & o, std::deque<int> const & rhs ) {
+std::ostream & operator<<( std::ostream & o, std::stack<int> const & rhs ) {
+	std::stack<int> tmp = rhs;
 	o << "{";
-	for(std::deque<int>::const_iterator it = rhs.cbegin(); it != rhs.cend(); it++)
-		if ((it + 1) != rhs.cend()) 
-			o << *it << ", ";
-		else
-			o << *it;
+	while (!tmp.empty()) {
+		o << tmp.top();
+		if (tmp.size() != 1)
+			o << " , ";
+		tmp.pop();
+	}
 	o << "}";
 	return o;
 }
@@ -64,11 +66,13 @@ void	RPN::_cal() {
 		if (nc != ' ' && nc != '\0')
 			throw RPN::ErrorException();
 		if (isdigit(c))
-			this->_deck.push_front(c - '0');
+			this->_stk.push(c - '0');
 		if (strchr(OPT, c)) {
 			int sum;
-			int a = this->_deck.at(0);
-			int b = this->_deck.at(1);
+			int a = this->_stk.top();
+			this->_stk.pop();
+			int b = this->_stk.top();
+			this->_stk.pop();
 			if (c == '+')
 				sum = b + a;
 			else if (c == '-')
@@ -77,13 +81,11 @@ void	RPN::_cal() {
 				sum = b * a;
 			else if (c == '/')
 				sum = b / a;
-			std::cout << "sum = " << sum << std::endl;
-			this->_deck.pop_front();
-			this->_deck.pop_front();
-			this->_deck.push_front(sum);
+			// std::cout << "sum = " << sum << std::endl;
+			this->_stk.push(sum);
 		}
-		std::cout << this->_deck << std::endl;
+		// std::cout << this->_stk << std::endl;
 		++i;
 	}
-	this->_result = this->_deck.at(0);
+	this->_result = this->_stk.top();
 }
