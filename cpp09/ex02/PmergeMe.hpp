@@ -1,20 +1,26 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
 #include <string>
+#include <ctime>
 #include <vector>
 #include <deque>
+#include <unistd.h>
 
 class PmergeMe {
 
-protected:
+private:
 
 	std::string			_input;
 	std::vector<int>	_vtr;
 	std::deque<int>		_dck;
+	double				_dif1;
+	double				_dif2;
 
-	void				_addDck(std::string);
 	void				_addVtr(std::string);
+	void				_addDck(std::string);
+
 
 public:
 
@@ -29,6 +35,11 @@ public:
 	std::string			getInput(void) const;
 	std::vector<int>	getVtr(void) const;
 	std::deque<int>		getDck(void) const;
+
+	void				sortVtr(void);
+	void				sortDck(void);
+	void				printVtrResult(void);
+	void				printDckResult(void);
 
 	class ErrorException: public std::exception {
 		public:

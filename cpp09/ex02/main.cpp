@@ -7,6 +7,10 @@ int	main(int argc, char *argv[]) {
 		PmergeMe nums = PmergeMe(argv[1]);
 		std::cout << "Before: " << nums << std::endl;
 		std::cout << "After: " << nums.getVtr() << std::endl;
+		nums.sortVtr();
+		nums.sortDck();
+		nums.printVtrResult();
+		nums.printDckResult();
 	}
 	catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
