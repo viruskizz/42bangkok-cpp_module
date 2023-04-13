@@ -1,4 +1,4 @@
-NAME = btc
+NAME = RPN
 CXX = c++
 # CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
@@ -7,7 +7,7 @@ RESET = "\033[0m"
 
 BUILD_DIR = build
 
-SRCS =	main.cpp BitcoinExchange.cpp
+SRCS =	main.cpp RPN.cpp
 
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
