@@ -3,42 +3,69 @@
 /************************************************
  * Setup default construct and  member function *
  ************************************************/
-RPN::RPN(): _name("") {
-	std::cout << "Default constructor overload" << std::endl;
-	std::cout << "" << std::endl;
+RPN::RPN(): _input(""), _result(0) {
+	throw RPN::ErrorException();
 };
 
-RPN::RPN(std::string name): _name(name){
-	std::cout << "Argument constructor overload" << std::endl;
+RPN::RPN(std::string input): _input(input), _result(0) {
+	this->_cal();
 };
 
 RPN::RPN(RPN const & src) {
-	std::cout << "Copy constructor overload" << std::endl;
 	*this = src;
 }
 
 RPN & RPN::operator=(RPN const & rhs) {
-	std::cout << "Assignment constructor overload" << std::endl;
 	if (this == &rhs)
 		return *this;
-		
-	this->_name = rhs._name;
+	this->_input = rhs._input;
+	this->_result = rhs._result;
+	this->_deck = rhs._deck;
 	return *this;
 }
 
 RPN::~RPN() {
-	std::cout << "~Deconstructor~" << std::endl;
 }
 
-std::string	RPN::getName() const {
-	return this->_name;
+std::string	RPN::getInput() const {
+	return this->_input;
 }
-
+int	RPN::getResult() const {
+	return this->_result;
+}
+std::deque<int>	RPN::getDeck() const {
+	return this->_deck;
+}
 std::ostream & operator<<( std::ostream & o, RPN const & rhs ) {
-	o << rhs.getName();
+	o << rhs.getInput();
+	return o;
+}
+std::ostream & operator<<( std::ostream & o, std::deque<int> const & rhs ) {
+	o << "{";
+	for(std::deque<int>::const_iterator  it = rhs.cbegin(); it != rhs.cend(); it++)
+		if ((it + 1) != rhs.cend()) 
+			o << *it << ", ";
+		else
+			o << *it;
+	o << "}";
 	return o;
 }
 
 /************************************************
  *           Specific member function           *
  ************************************************/
+const char *OPT = "+-*/";
+void	RPN::_cal() {
+	for (int i = 0; i < this->_input.length(); ++i) {
+		char c = this->_input[i];
+		char nc = this->_input[i + 1];
+		if (!isdigit(c) && !strchr(OPT, c))
+			throw RPN::ErrorException();
+		if (nc != ' ' && nc != '\0')
+			throw RPN::ErrorException();
+		if (isdigit(c))
+			this->_deck.push_back(c - '0');
+		std::cout << this->_deck << std::endl;
+		++i;
+	}
+}
