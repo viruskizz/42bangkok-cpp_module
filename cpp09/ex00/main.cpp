@@ -5,7 +5,9 @@ int main(int argc, char *argv[]) {
 		return (std::cout << "need file name as argument" << std::endl, 1);
 	try
 	{
-		BitcoinExchange btc = BitcoinExchange(argv[1]);
+		BitcoinExchange btc = BitcoinExchange();
+		// std::cout << btc.getData() << std::endl;
+		btc.exchange("input.txt");
 	}
 	catch(const std::exception& e)
 	{
