@@ -13,12 +13,9 @@ private:
 	std::string						_filedata;
 	std::map<std::string, float>	_data;
 
-	bool		_isValidDate(std::string const s) const;
-	bool		_isValidValue(std::string const s, bool isInt) const;
-	void		_addData(std::string s);
-	void		_cal(std::string line);
-	void		_execfile(std::string, void (BitcoinExchange::*)(std::string));
-	std::string	_closestDate(std::string date);
+	void		_addData(std::string & s);
+	void		_cal(std::string & line);
+	void		_execfile(std::string &, void (BitcoinExchange::*)(std::string &));
 
 public:
 
@@ -30,11 +27,11 @@ public:
 	BitcoinExchange & operator=(BitcoinExchange const & rhs);
 
 
-	void exchange(std::string file);
+	void							exchange(std::string);
 
 	std::string						const getFiledata() const;
 	std::map<std::string, float>	const getData() const;
-	float							getValue(std::string key) const;
+	float							getValue(std::string) const;
 
 	class ReadFileException: public std::exception {
 		public:
