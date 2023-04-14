@@ -112,14 +112,14 @@ void	PmergeMe::sortVtr() {
 	clock_t t = clock();
 	tmergeSort(this->_vtr, 0, this->_vtr.size() - 1);
 	this->_dif1 = ((double) (clock() - t)) / CLOCKS_PER_SEC;
-	std::cout << "Vector-Sorted: " << this->_vtr << std::endl;
+	// std::cout << "Vector-Sorted: " << this->_vtr << std::endl;
 }
 
 void	PmergeMe::sortDck() {
 	clock_t t = clock();
 	tmergeSort(this->_dck, 0, this->_dck.size() - 1);
 	this->_dif2 = ((double) (clock() - t)) / CLOCKS_PER_SEC;
-	std::cout << "Deque-Sorted: " << this->_dck << std::endl;
+	// std::cout << "Deque-Sorted: " << this->_dck << std::endl;
 }
 
 void	PmergeMe::printVtrResult(void) const {
@@ -127,8 +127,8 @@ void	PmergeMe::printVtrResult(void) const {
 	std::cout << "Time to process a range of ";
 	std::cout << this->_vtr.size();
 	std::cout << " elements with std::vector : ";
-	std::cout << std::fixed << this->_dif1;
-	std::cout << " s" << std::endl;
+	std::cout << std::fixed << this->_dif1 * 1000000;
+	std::cout << " us" << std::endl;
 }
 
 void	PmergeMe::printDckResult(void) const {
@@ -136,8 +136,8 @@ void	PmergeMe::printDckResult(void) const {
 	std::cout << "Time to process a range of ";
 	std::cout << this->_dck.size();
 	std::cout << " elements with std::deque  : ";
-	std::cout << std::fixed << this->_dif2;
-	std::cout << " s" << std::endl;
+	std::cout << std::fixed << this->_dif2 * 1000000;
+	std::cout << " us" << std::endl;
 }
 
 /*
