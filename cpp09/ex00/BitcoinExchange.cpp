@@ -1,5 +1,10 @@
 #include "BitcoinExchange.hpp"
 
+bool		isValidDate(std::string const s);
+bool		isValidValue(std::string const s, bool isInt);
+int			dateToTimestamp(std::string date);
+std::string	closestDate(std::string date, std::map<std::string, float> data);
+
 /************************************************
  * Setup default construct and  member function *
  ************************************************/
@@ -60,25 +65,25 @@ void BitcoinExchange::exchange(std::string file) {
 	this->_execfile(file, &BitcoinExchange::_cal);
 }
 
-void	BitcoinExchange::_addData(std::string s) {
+void	BitcoinExchange::_addData(std::string & s) {
 	std::string key = s.substr(0, s.find(","));
 	std::string value = s.substr(s.find(",") + 1);
-	if (!this->_isValidDate(key))
+	if (!isValidDate(key))
 		return ;
-	else if (!this->_isValidValue(value, false))
+	else if (!isValidValue(value, false))
 		return ;
 	else 
 		this->_data[key] = std::atof(value.c_str());
 }
 
-void	BitcoinExchange::_cal(std::string line) {
+void	BitcoinExchange::_cal(std::string & line) {
 	if (line.length() < 12 || line.find("|") == std::string::npos)
 		return (std::cerr << "Error: bad input => " << line << std::endl, (void) NULL);
 	std::string date = line.substr(0, 10);
 	std::string value = line.substr(line.find("|") + 2);
-	if (!this->_isValidDate(date)) {
+	if (!isValidDate(date)) {
 		return ;
-	} else if (!this->_isValidValue(value, true)) {
+	} else if (!isValidValue(value, true)) {
 		return ;
 	}
 	int val = std::atoi(value.c_str());
@@ -90,11 +95,11 @@ void	BitcoinExchange::_cal(std::string line) {
 	if (this->_data.find(date) != this->_data.end())
 		data = this->_data.at(date);
 	else
-		data =  this->_data.at(this->_closestDate(date));
+		data =  this->_data.at(closestDate(date, this->_data));
 	std::cout << date << " => " << val << "*" << data << " = " << val * data << std::endl;
 }
 
-void	BitcoinExchange::_execfile(std::string filename, void (BitcoinExchange::*func)(std::string line)) {
+void	BitcoinExchange::_execfile(std::string & filename, void (BitcoinExchange::*func)(std::string & line)) {
 	std::fstream	file;
 	std::string		line;
 	file.open(filename.c_str());
@@ -114,7 +119,11 @@ void	BitcoinExchange::_execfile(std::string filename, void (BitcoinExchange::*fu
 	}
 }
 
-bool	BitcoinExchange::_isValidDate(std::string const s) const {
+/************************************************
+ *               Utility function               *
+ ************************************************/
+
+bool	isValidDate(std::string const s) {
 	if (s.length() != 10 || s.at(4) != '-' || s.at(7) != '-')
 		return (std::cerr << "Error: bad input => " << s << std::endl, false);
 	int	y = atoi(s.substr(0, 4).c_str());
@@ -125,7 +134,7 @@ bool	BitcoinExchange::_isValidDate(std::string const s) const {
 	return true;
 }
 
-bool	BitcoinExchange::_isValidValue(std::string const s, bool isInt) const {
+bool	isValidValue(std::string const s, bool isInt) {
 	if (s.length() == 0 || s.empty())
 		return (std::cerr << "Error: invalid value => " << s << std::endl, false);
 	for (int i = 0; i < (int) s.length(); i++) {
@@ -143,14 +152,12 @@ int	dateToTimestamp(std::string date) {
 	return (y * 365 * dt) + (m * 30 * dt) + (d * dt);
 }
 
-std::string BitcoinExchange::_closestDate(std::string date) {
-	std::map<std::string, float> temp;
-	temp = this->_data;
+std::string closestDate(std::string date, std::map<std::string, float> data) {
 	int timestamp = dateToTimestamp(date);
-	for (std::map<std::string, float>::reverse_iterator it = temp.rbegin(); it != temp.rend(); ++it) {
+	for (std::map<std::string, float>::reverse_iterator it = data.rbegin(); it != data.rend(); ++it) {
 		if (dateToTimestamp(it->first) < timestamp) {
 			return it->first;
 		}
 	}
-	return temp.begin()->first;
+	return data.begin()->first;
 }
