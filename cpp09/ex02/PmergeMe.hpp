@@ -7,6 +7,7 @@
 #include <vector>
 #include <deque>
 #include <unistd.h>
+#include <cstdlib>
 
 class PmergeMe {
 

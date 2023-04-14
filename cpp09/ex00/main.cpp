@@ -6,8 +6,7 @@ int main(int argc, char *argv[]) {
 	try
 	{
 		BitcoinExchange btc = BitcoinExchange();
-		// std::cout << btc.getData() << std::endl;
-		btc.exchange("input.txt");
+		btc.exchange(argv[1]);
 	}
 	catch(const std::exception& e)
 	{

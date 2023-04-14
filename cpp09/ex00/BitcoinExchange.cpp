@@ -88,7 +88,7 @@ void	BitcoinExchange::_cal(std::string & line) {
 	} else if (!isValidValue(value, true)) {
 		return ;
 	}
-	int val = std::atoi(value.c_str());
+	int val = atoi(value.c_str());
 	if (val < 0)
 		return (std::cerr << "Error: not a positive number => " << val << std::endl, (void) NULL);
 	if (val > 1000)

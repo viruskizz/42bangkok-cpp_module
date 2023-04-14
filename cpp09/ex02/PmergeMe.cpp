@@ -89,6 +89,7 @@ std::ostream & operator<<( std::ostream & o, std::deque<int> const & rhs ) {
 
 
 void	PmergeMe::_addNumbers(std::string &s) {
+	s.erase(s.find_last_not_of(' ') + 1);  
 	std::size_t start = 0;
 	std::size_t end = s.find(" ");
 	while (end != std::string::npos) {
@@ -112,7 +113,7 @@ void	PmergeMe::sortVtr() {
 	clock_t t = clock();
 	tmergeSort(this->_vtr, 0, this->_vtr.size() - 1);
 	this->_dif1 = ((double) (clock() - t)) / CLOCKS_PER_SEC;
-	// std::cout << "Vector-Sorted: " << this->_vtr << std::endl;
+	std::cout << "Vector-Sorted: " << this->_vtr << std::endl;
 }
 
 void	PmergeMe::sortDck() {

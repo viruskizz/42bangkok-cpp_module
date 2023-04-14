@@ -58,7 +58,7 @@ std::ostream & operator<<( std::ostream & o, std::stack<int> const & rhs ) {
  ************************************************/
 const char *OPT = "+-*/";
 void	RPN::_cal() {
-	for (int i = 0; i < this->_input.length(); ++i) {
+	for (int i = 0; i < (int) this->_input.length(); i += 2) {
 		char c = this->_input[i];
 		char nc = this->_input[i + 1];
 		if (!isdigit(c) && !strchr(OPT, c))
@@ -85,7 +85,6 @@ void	RPN::_cal() {
 			this->_stk.push(sum);
 		}
 		// std::cout << this->_stk << std::endl;
-		++i;
 	}
 	this->_result = this->_stk.top();
 }
