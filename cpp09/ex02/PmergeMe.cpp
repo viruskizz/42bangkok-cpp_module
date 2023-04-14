@@ -1,13 +1,12 @@
 #include "PmergeMe.hpp"
 
-bool	const isNumber(std::string & s);
-void	mergeSort(int arr[], int l, int r);
-void	merge(int arr[], int p, int q, int r);
+bool	isNumber(std::string & s);
 
 template<typename T>
-void tmerge(T arr, int p, int q, int r) ;
+void tmerge(T & arr, int start, int mid, int end);
+
 template<typename T>
-void tmergeSort(T arr, int l, int r);
+void tmergeSort(T & arr, int start, int end);
 
 /************************************************
  * Setup default construct and  member function *
@@ -145,7 +144,7 @@ void	PmergeMe::printDckResult(void) const {
  * Utility
  */
 
-bool	const isNumber(std::string & s) {
+bool	isNumber(std::string & s) {
 	for (int i = 0; i < (int) s.length(); i++) {
 		if (!isdigit(s.at(i)))
 			return false;
@@ -154,50 +153,32 @@ bool	const isNumber(std::string & s) {
 }
 
 template<typename T>
-void tmergeSort(T arr, int l, int r) {
-	if (l < r) {
+void tmergeSort(T & arr, int start, int end) {
+	if (start < end) {
 		// m is the point where the array is divided into two subarrays
-		int m = l + (r - l) / 2;
-		tmergeSort(arr, l, m);
-		tmergeSort(arr, m + 1, r);
+		int mid = start + (end - start) / 2;
+		tmergeSort(arr, start, mid);
+		tmergeSort(arr, mid + 1, end);
 		// Merge the sorted subarrays
-		tmerge(arr, l, m, r);
+		tmerge(arr, start, mid, end);
 	}
 }
 
 template<typename T>
-void tmerge(T arr, int p, int q, int r) {
-	// Create L ← A[p..q] and M ← A[q+1..r]
-	int n1 = q - p + 1;
-	int n2 = r - q;	
-	int L[n1], M[n2];	
-	for (int i = 0; i < n1; i++)
-	  L[i] = arr[p + i];
-	for (int j = 0; j < n2; j++)
-	  M[j] = arr[q + 1 + j];	
-	// Maintain current index of sub-arrays and main array
-	int i, j, k;
-	i = 0;
-	j = 0;
-	k = p;	
-	// Until we reach either end of either L or M, pick larger among
-	// elements L and M and place them in the correct position at A[p..r]
-	while (i < n1 && j < n2) {
-		if (L[i] <= M[j]) {
-			arr[k] = L[i];
-			i++;
-		} else {
-			arr[k] = M[j];
-			j++;
-		}
-		k++;
-	}	
-	// When we run out of elements in either L or M,
-	// pick up the remaining elements and put in A[p..r]
-	while (i < n1) {
-	  arr[k++] = L[i++];
+void tmerge(T & arr, int start, int mid, int end) {
+	T temp(end - start + 1);
+	int i = start, j = mid + 1, k = 0;
+
+	while (i <= mid && j <= end) {
+		temp[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
 	}
-	while (j < n2) {
-		arr[k++] = M[j++];
+
+	while (i <= mid) {
+		temp[k++] = arr[i++];
 	}
+
+	while (j <= end) {
+		temp[k++] = arr[j++];
+	}
+	std::copy(temp.begin(), temp.end(), arr.begin() + start);
 }
