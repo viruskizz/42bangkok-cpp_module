@@ -68,6 +68,8 @@ void	RPN::_cal() {
 		if (isdigit(c))
 			this->_stk.push(c - '0');
 		if (strchr(OPT, c)) {
+			if (this->_stk.size() < 2)
+				throw RPN::ErrorException();
 			int sum;
 			int a = this->_stk.top();
 			this->_stk.pop();
@@ -86,5 +88,7 @@ void	RPN::_cal() {
 		}
 		// std::cout << this->_stk << std::endl;
 	}
+	if (this->_stk.size() != 1)
+		throw RPN::ErrorException();
 	this->_result = this->_stk.top();
 }

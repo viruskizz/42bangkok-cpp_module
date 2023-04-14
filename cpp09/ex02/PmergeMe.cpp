@@ -113,7 +113,7 @@ void	PmergeMe::sortVtr() {
 	clock_t t = clock();
 	tmergeSort(this->_vtr, 0, this->_vtr.size() - 1);
 	this->_dif1 = ((double) (clock() - t)) / CLOCKS_PER_SEC;
-	std::cout << "Vector-Sorted: " << this->_vtr << std::endl;
+	// std::cout << "Vector-Sorted: " << this->_vtr << std::endl;
 }
 
 void	PmergeMe::sortDck() {
