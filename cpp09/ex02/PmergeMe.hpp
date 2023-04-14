@@ -18,8 +18,7 @@ private:
 	double				_dif1;
 	double				_dif2;
 
-	void				_addVtr(std::string);
-	void				_addDck(std::string);
+	void				_addNumbers(std::string &);
 
 
 public:
@@ -38,8 +37,8 @@ public:
 
 	void				sortVtr(void);
 	void				sortDck(void);
-	void				printVtrResult(void);
-	void				printDckResult(void);
+	void				printVtrResult(void) const;
+	void				printDckResult(void) const;
 
 	class ErrorException: public std::exception {
 		public:
