@@ -27,6 +27,7 @@ BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & rhs) {
 		return *this;
 	this->_data = rhs._data;
 	this->_filedata = rhs._filedata;
+	this->_fileinput = rhs._fileinput;
 	return *this;
 }
 
@@ -62,6 +63,7 @@ std::ostream & operator<<( std::ostream & o, std::map<std::string, float> const 
  ************************************************/
 
 void BitcoinExchange::exchange(std::string file) {
+	this->_fileinput = file;
 	this->_execfile(file, &BitcoinExchange::_cal);
 }
 
@@ -113,6 +115,8 @@ void	BitcoinExchange::_execfile(std::string & filename, void (BitcoinExchange::*
 				break;
 			if (i != 1)
 				(this->*func)(line);
+			else if (i == 1 && filename == this->_fileinput)
+				std::cout << line << std::endl;
 		}
 		std::cin.clear();
 		file.close();

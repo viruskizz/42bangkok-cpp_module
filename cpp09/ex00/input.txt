@@ -1,4 +1,4 @@
-date,exchange_rate
+date | exchange_rate
 2009-06-20 | 0
 2010-08-23 | 1
 2011-12-03

@@ -11,6 +11,7 @@ class BitcoinExchange {
 private:
 
 	std::string						_filedata;
+	std::string						_fileinput;
 	std::map<std::string, float>	_data;
 
 	void		_addData(std::string & s);
