@@ -6,9 +6,9 @@ int	main(int argc, char *argv[]) {
 	try {
 		PmergeMe nums = PmergeMe(argv[1]);
 		std::cout << "Before: " << nums << std::endl;
-		std::cout << "After: " << nums.getVtr() << std::endl;
 		nums.sortVtr();
 		nums.sortDck();
+		std::cout << "After: " << nums.getVtr() << std::endl;
 		nums.printVtrResult();
 		nums.printDckResult();
 	}
