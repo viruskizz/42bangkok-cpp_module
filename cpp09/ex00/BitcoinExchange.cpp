@@ -146,7 +146,9 @@ bool	isValidValue(std::string const s, bool isInt) {
 	if (s.length() == 0 || s.empty())
 		return (std::cerr << "Error: invalid value => " << s << std::endl, false);
 	for (int i = 0; i < (int) s.length(); i++) {
-		if (!isdigit(s.at(i)) && (isInt && s.at(i) == '.'))
+		if (!isInt && !regex_match(s, std::regex("[+-]?([0-9]*[.])?[0-9]+")))
+			return (std::cerr << "Error: invalid value => " << s << std::endl, false);
+		if (isInt && !regex_match(s, std::regex("[+-]?([0-9]*)")))
 			return (std::cerr << "Error: invalid value => " << s << std::endl, false);
 	}
 	return true;
