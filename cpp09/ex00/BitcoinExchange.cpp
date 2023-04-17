@@ -79,7 +79,11 @@ void	BitcoinExchange::_addData(std::string & s) {
 }
 
 void	BitcoinExchange::_cal(std::string & line) {
-	if (line.length() < 12 || line.find("|") == std::string::npos)
+	// ltrim
+	line.erase(0, line.find_first_not_of(' '));
+	// rtrim
+	line.erase(line.find_last_not_of(' ') + 1);
+	if (line.length() < 14 || line.find("|") == std::string::npos)
 		return (std::cerr << "Error: bad input => " << line << std::endl, (void) NULL);
 	std::string date = line.substr(0, 10);
 	std::string value = line.substr(line.find("|") + 2);
