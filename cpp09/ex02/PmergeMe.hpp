@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <string>
+#include <cstring>
 #include <ctime>
 #include <vector>
 #include <deque>
@@ -13,26 +13,24 @@ class PmergeMe {
 
 private:
 
-	std::string			_input;
 	std::vector<int>	_vtr;
 	std::deque<int>		_dck;
 	double				_dif1;
 	double				_dif2;
 
 	void				_addNumbers(std::string &);
-
+	void				_addNumbers(char **argv);
 
 public:
 
 	PmergeMe(void);
-	PmergeMe(std::string input);
-	PmergeMe(PmergeMe const & src);
+	PmergeMe(int, char **);
+	PmergeMe(PmergeMe const &);
 	~PmergeMe(void);
 
 	PmergeMe & operator=(PmergeMe const & rhs);
 
 
-	std::string			getInput(void) const;
 	std::vector<int>	getVtr(void) const;
 	std::deque<int>		getDck(void) const;
 

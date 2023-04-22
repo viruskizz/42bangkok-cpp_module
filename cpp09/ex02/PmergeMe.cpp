@@ -1,6 +1,6 @@
 #include "PmergeMe.hpp"
 
-bool	isNumber(std::string & s);
+bool	isNumber(char *s);
 
 template<typename T>
 void tmerge(T & arr, int start, int mid, int end);
@@ -11,12 +11,13 @@ void tmergeSort(T & arr, int start, int end);
 /************************************************
  * Setup default construct and  member function *
  ************************************************/
-PmergeMe::PmergeMe(): _input("") {
+PmergeMe::PmergeMe() {
 	throw PmergeMe::ErrorException();
 };
 
-PmergeMe::PmergeMe(std::string input): _input(input) {
-	this->_addNumbers(input);
+PmergeMe::PmergeMe(int argc, char **argv) {
+	argv[argc] = NULL;
+	this->_addNumbers(argv + 1);
 };
 
 PmergeMe::PmergeMe(PmergeMe const & src) {
@@ -27,7 +28,6 @@ PmergeMe & PmergeMe::operator=(PmergeMe const & rhs) {
 	std::cout << "Assignment constructor overload" << std::endl;
 	if (this == &rhs)
 		return *this;
-	this->_input = rhs._input;
 	this->_vtr = rhs._vtr;
 	this->_dck = rhs._dck;
 	return *this;
@@ -36,32 +36,12 @@ PmergeMe & PmergeMe::operator=(PmergeMe const & rhs) {
 PmergeMe::~PmergeMe() {
 }
 
-std::string	PmergeMe::getInput() const {
-	return this->_input;
-}
-
 std::vector<int>	PmergeMe::getVtr(void) const {
 	return this->_vtr;
 }
 
 std::deque<int>		PmergeMe::getDck(void) const {
 	return this->_dck;
-}
-
-std::ostream & operator<<( std::ostream & o, PmergeMe const & rhs ) {
-	int i = 0;
-	int sp = 0;
-	std::string s = rhs.getInput();
-	while (s.c_str()[i] != '\0') {
-		if (s.at(i) == ' ')
-			sp++;
-		if (sp == 5) {
-			o << " [...]";
-			break;
-		}
-		o << s.at(i++);
-	}
-	return o;
 }
 
 std::ostream & operator<<( std::ostream & o, std::vector<int> const & rhs ) {
@@ -87,40 +67,28 @@ std::ostream & operator<<( std::ostream & o, std::deque<int> const & rhs ) {
  *           Specific member function           *
  ************************************************/
 
-
-void	PmergeMe::_addNumbers(std::string &s) {
-	s.erase(s.find_last_not_of(' ') + 1);  
-	std::size_t start = 0;
-	std::size_t end = s.find(" ");
-	while (end != std::string::npos) {
-		std::string num = s.substr(start, end - start);
-		if (!isNumber(num))
+void	PmergeMe::_addNumbers(char **argv) {
+	for (int i = 0; argv[i]; i++) {
+		if (!isNumber(argv[i]))
 			throw PmergeMe::ErrorException();
-		this->_dck.push_back(atoi(num.c_str()));
-		this->_vtr.push_back(atoi(num.c_str()));
-		start = end + 1;
-		end = s.find(" ", start);
+		int num = atoi(argv[i]);
+		if (num < 0)
+			throw PmergeMe::ErrorException();
+		this->_dck.push_back(num);
+		this->_vtr.push_back(num);
 	}
-	std::string num = s.substr(start, end - start);
-	if (!isNumber(num))
-		throw PmergeMe::ErrorException();
-	this->_dck.push_back(atoi(num.c_str()));
-	this->_vtr.push_back(atoi(num.c_str()));
 }
-
 
 void	PmergeMe::sortVtr() {
 	clock_t t = clock();
 	tmergeSort(this->_vtr, 0, this->_vtr.size() - 1);
 	this->_dif1 = ((double) (clock() - t)) / CLOCKS_PER_SEC;
-	// std::cout << "Vector-Sorted: " << this->_vtr << std::endl;
 }
 
 void	PmergeMe::sortDck() {
 	clock_t t = clock();
 	tmergeSort(this->_dck, 0, this->_dck.size() - 1);
 	this->_dif2 = ((double) (clock() - t)) / CLOCKS_PER_SEC;
-	// std::cout << "Deque-Sorted: " << this->_dck << std::endl;
 }
 
 void	PmergeMe::printVtrResult(void) const {
@@ -145,9 +113,9 @@ void	PmergeMe::printDckResult(void) const {
  * Utility
  */
 
-bool	isNumber(std::string & s) {
-	for (int i = 0; i < (int) s.length(); i++) {
-		if (!isdigit(s.at(i)))
+bool	isNumber(char *s) {
+	for (int i = 0; i < (int) strlen(s); i++) {
+		if (!isdigit(s[i]))
 			return false;
 	}
 	return true;
