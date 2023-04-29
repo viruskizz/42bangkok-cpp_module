@@ -131,6 +131,17 @@ void	BitcoinExchange::_execfile(std::string & filename, void (BitcoinExchange::*
  *               Utility function               *
  ************************************************/
 
+bool	isLeepYear(int y) {
+	if (y % 400 == 0)
+		return true;
+	else if (y % 100 == 0)
+		return false;
+	else if (y % 4 == 0)
+		return true;
+	else
+		return false;
+}
+
 bool	isValidDate(std::string const s) {
 	if (s.length() != 10 || s.at(4) != '-' || s.at(7) != '-')
 		return (std::cerr << "Error: bad input => " << s << std::endl, false);
@@ -138,6 +149,12 @@ bool	isValidDate(std::string const s) {
 	int	m = atoi(s.substr(5, 2).c_str());
 	int	d = atoi(s.substr(8, 2).c_str());
 	if (y < 1990 || m < 0 || m > 12 || d < 0 || d > 31)
+		return (std::cerr << "Error: bad input => " << s << std::endl, false);
+	if (m == 2 && (isLeepYear(y) && d > 29))
+		return (std::cerr << "Error: bad input => " << s << std::endl, false);
+	if (m == 2 && (!isLeepYear(y) && d > 28))
+		return (std::cerr << "Error: bad input => " << s << std::endl, false);
+	if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30)
 		return (std::cerr << "Error: bad input => " << s << std::endl, false);
 	return true;
 }
